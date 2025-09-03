@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GreenHouse</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="top"><h2>GreenHouse</h2></div>
+  <div class="wrap">
+    <div id="status" class="foot">Các chỉ số </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="cap">Độ ẩm đất</div>
+        <div class="val"><span id="soil">--</span> %</div>
+      </div>
+      <div class="card">
+        <div class="cap">Cường độ ánh sáng</div>
+        <div class="val"><span id="lux">--</span> lx</div>
+      </div>
+      <div class="card">
+        <div class="cap">Nhiệt độ không khí</div>
+        <div class="val"><span id="temp">--</span> °C</div>
+      </div>
+      <div class="card">
+        <div class="cap">Độ ẩm không khí</div>
+        <div class="val"><span id="humi">--</span> %</div>
+      </div>
+    </div>
+
+    <div class="foot" style="margin:18px 0 6px">Điều khiển:</div>
+    <div class="grid">
+      <div class="card">
+        <div class="cap">ĐÈN</div>
+        <div style="margin-top:10px"><button id="btn1" class="btn off" data-state="0">Bật</button></div>
+      </div>
+      <div class="card">
+        <div class="cap">Tốc độ quạt</div>
+        <div class="val"><span id="fanv">0</span> / 255</div>
+        <input id="fans" class="slider" type="range" min="0" max="255" step="1" value="0">
+      </div>
+      <div class="card">
+        <div class="cap">MÁY BƠM</div>
+        <div style="margin-top:10px"><button id="btn3" class="btn off" data-state="0">Bật</button></div>
+      </div>
+    </div>
+
+    <div class="foot">Kết nối: <span id="conn" class="chip">đang kiểm tra…</span></div>
+  </div>
+
+<script>
+if (!!window.EventSource) {
+  const st = document.getElementById('status');
+  const conn = document.getElementById('conn');
+  const es = new EventSource('/events');
+
+  es.addEventListener('open', e => {
+    st.textContent = 'Đã kết nối SSE';
+    conn.textContent = 'online';
+    conn.className = 'chip';
+  });
+
+  es.addEventListener('error', e => {
+    if (e.target.readyState !== EventSource.OPEN) {
+      st.textContent = 'Mất kết nối SSE (đang thử lại…)';
+      conn.textContent = 'reconnect…';
+      conn.className = 'chip bad';
+    }
+  });
+
+  // Sensor data
+  es.addEventListener('soil', e => { document.getElementById('soil').textContent = e.data; });
+  es.addEventListener('lux', e => { document.getElementById('lux').textContent = e.data; });
+  es.addEventListener('temperature', e => { document.getElementById('temp').textContent = e.data; });
+  es.addEventListener('humidity', e => { document.getElementById('humi').textContent = e.data; });
+
+  // ĐÈN/BƠM ON-OFF
+  function applyBtn(btn, state){
+    btn.dataset.state = state ? "1":"0";
+    if(state){ btn.classList.remove('off'); btn.classList.add('on'); btn.textContent='Tắt'; }
+    else     { btn.classList.remove('on');  btn.classList.add('off'); btn.textContent='Bật'; }
+  }
+  es.addEventListener('r1', e => applyBtn(document.getElementById('btn1'), e.data === '1'));
+  es.addEventListener('r3', e => applyBtn(document.getElementById('btn3'), e.data === '1'));
+
+  // QUẠT PWM (0..255)
+  const fans = document.getElementById('fans');
+  const fanv = document.getElementById('fanv');
+  function setFanUI(v){
+    fanv.textContent = v;
+    if (parseInt(fans.value) !== parseInt(v)) fans.value = v;
+  }
+  es.addEventListener('fan', e => setFanUI(e.data));
+
+  // Click handlers cho ĐÈN/BƠM
+  function callMosfet(id, next){
+    const btn = document.getElementById('btn'+id);
+    btn.disabled = true;
+    fetch('/api/mosfet?id='+id+'&v='+(next?1:0))
+      .catch(_=>{})
+      .finally(()=>{ btn.disabled = false; });
+  }
+  ['1','3'].forEach(i=>{
+    const b = document.getElementById('btn'+i);
+    b.addEventListener('click', ()=>{
+      const cur = b.dataset.state === '1';
+      callMosfet(i, !cur);
+    });
+  });
+
+  // Gửi PWM khi đổi slider (debounce 120ms)
+  let tmr=null;
+  fans.addEventListener('input', ()=>{
+    const v = fans.value;
+    setFanUI(v);
+    if (tmr) clearTimeout(tmr);
+    tmr = setTimeout(()=>{ fetch('/api/fan?value='+v).catch(_=>{}); }, 120);
+  });
+}
+</script>
+</body>
+</html>
