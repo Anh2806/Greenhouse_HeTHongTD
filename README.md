@@ -28,3 +28,8 @@ Implemented on Arduino library platform
 - Breadboard
 - Batteries
 - Miscellaneous components (pipe, funnel, etc.)
+
+## Mô phỏng test
+Website:
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/10f1b07d-2c3e-4aab-a3f7-895f9c068d87" />
