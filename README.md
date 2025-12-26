@@ -50,16 +50,24 @@ The field device uses **ESP32-S3** as the main controller to read sensors (AHT30
 <img width="313" height="313" alt="image" src="https://github.com/user-attachments/assets/42bc0e79-f60f-4e44-965a-711b3c7a9039" />
 
 - **SIMCom A7680C** (4G/LTE Cat-1 module, optional/future)
+<img width="286" height="286" alt="image" src="https://github.com/user-attachments/assets/30df7081-7d56-4ec2-8d75-30ef82c88eb7" />
+
 - **12V 4-channel relay module** (actuator switching)
+<img width="372" height="372" alt="image" src="https://github.com/user-attachments/assets/619e3c13-edaa-4966-9c6f-10797c006841" />
+
 - **8-slot terminal block** (wiring and power distribution)
+<img width="285" height="285" alt="image" src="https://github.com/user-attachments/assets/e931eab5-49f7-4490-8e69-d974abb5297a" />
+
 - **PT550 Analog Ambient Light Sensor V2**
+<img width="280" height="280" alt="image" src="https://github.com/user-attachments/assets/dd46d45d-4f5b-4abf-907c-a29a388ee0f7" />
+
 - **WeAct AHT30** (air temperature/humidity sensor)
 - **Soil moisture sensor v1.2**
 - **Raspberry Pi 4** (MQTT + Node-RED server)
 
 ---
 
-<img width="1920" height="2560" alt="image" src="https://github.com/user-attachments/assets/c29318d5-3c56-4650-b1b8-ddd0e69d5ecc" />
+<img width="1720" height="2060" alt="image" src="https://github.com/user-attachments/assets/c29318d5-3c56-4650-b1b8-ddd0e69d5ecc" />
 
 
 ## 🔌 Wiring / Pin Mapping (Based on the Firmware)
