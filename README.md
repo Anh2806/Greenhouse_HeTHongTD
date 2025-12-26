@@ -3,7 +3,7 @@
 The **“Smart Garden Control and Monitoring using ESP32”** project is an IoT prototype designed to **monitor plant-growing environmental conditions in real time** and **remotely control actuators** (light, fan, pump, roof/aux load) via **MQTT** and a **Node-RED Dashboard**.  
 The field device uses **ESP32-S3** as the main controller to read sensors (AHT30, PT550, soil moisture), display values locally on a **TFT ST7735A**, and optionally supports **4G connectivity using SIMCom A7680C** for deployment where Wi-Fi is unavailable.
 
-<img width="1020" height="1020" alt="image" src="https://github.com/user-attachments/assets/9b72826d-c694-4adc-a529-9043fff212f1" />
+<img width="720" height="720" alt="image" src="https://github.com/user-attachments/assets/9b72826d-c694-4adc-a529-9043fff212f1" />
 
 
 ---
