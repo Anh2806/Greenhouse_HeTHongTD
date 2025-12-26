@@ -127,8 +127,14 @@ Example control payloads:
 - `mqtt in (esp32/temperature)` → convert `msg.payload` to number → `ui_gauge` + `ui_chart`
 - Repeat similarly for humidity / lux / soil
 
+<img width="605" height="315" alt="image" src="https://github.com/user-attachments/assets/f4639b7a-4318-4408-b3e9-ce8d4f9e540c" />
+
+
 ### Control flow
 - `ui_switch` (Light/Fan/Pump/Roof) → `function/change node` to create payload (`on_led`, `off_led`, etc.) → `mqtt out (esp32/output)`
+
+
+<img width="605" height="195" alt="image" src="https://github.com/user-attachments/assets/7d4968ad-b969-48d3-ac19-3d91ac5e29ea" />
 
 ---
 
