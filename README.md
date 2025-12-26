@@ -41,8 +41,14 @@ The field device uses **ESP32-S3** as the main controller to read sensors (AHT30
 ## 🔧 Hardware List
 
 - **ESP32-S3** (main controller)
+<img width="354" height="287" alt="image" src="https://github.com/user-attachments/assets/d96d600d-6446-4281-8107-492f8d760a94" />
+
 - **LM2596S 3A** buck converter (stable power supply)
+<img width="311" height="207" alt="image" src="https://github.com/user-attachments/assets/14966adc-6b06-4cd1-b904-2ca154903efd" />
+
 - **1.8" TFT ST7735A** (local display)
+<img width="313" height="313" alt="image" src="https://github.com/user-attachments/assets/42bc0e79-f60f-4e44-965a-711b3c7a9039" />
+
 - **SIMCom A7680C** (4G/LTE Cat-1 module, optional/future)
 - **12V 4-channel relay module** (actuator switching)
 - **8-slot terminal block** (wiring and power distribution)
