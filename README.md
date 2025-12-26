@@ -67,7 +67,8 @@ The field device uses **ESP32-S3** as the main controller to read sensors (AHT30
 
 ---
 
-<img width="1720" height="2060" alt="image" src="https://github.com/user-attachments/assets/c29318d5-3c56-4650-b1b8-ddd0e69d5ecc" />
+<img width="585" height="713" alt="image" src="https://github.com/user-attachments/assets/c1d20feb-8411-491f-8a76-05e662d78da8" />
+
 
 
 ## 🔌 Wiring / Pin Mapping (Based on the Firmware)
